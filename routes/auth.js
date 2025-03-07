@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const { compareSync } = require("bcryptjs");
 
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.get(
   (req, res) => {
     const token = jwt.sign({ user: req.user }, process.env.JWT_SECRET, { expiresIn: "1h" });
     // Use frontend URL from environment variable
+    console.log("user", req.user);
     res.redirect(`${process.env.FRONTEND_URL}/auth/google/callback?token=${token}`);
   }
 );
