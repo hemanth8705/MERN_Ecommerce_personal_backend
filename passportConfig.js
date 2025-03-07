@@ -8,8 +8,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      // Change this for local development
-      callbackURL: "http://localhost:5000/auth/google/callback",
+      callbackURL: "https://mern-ecommerce-personal-backend.onrender.com/auth/google/callback",
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
