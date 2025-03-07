@@ -23,7 +23,7 @@ app.use(passport.session());
 app.use("/auth", authRoutes);
 
 mongoose
-  .connect("mongodb://localhost:27017/mern-auth", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
