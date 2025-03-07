@@ -9,16 +9,14 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 // Google OAuth Callback
 router.get(
-    "/google/callback",
-    passport.authenticate("google", { failureRedirect: "/" }),
-    (req, res) => {
-      // Generate JWT Token
-      const token = jwt.sign({ user: req.user }, process.env.JWT_SECRET, { expiresIn: "1h" });
-      console.log("req.user", req.user);
-      // Redirect to frontend callback with token in query
-      res.redirect(`http://localhost:3000/auth/google/callback?token=${token}`);
-    }
-  );
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    const token = jwt.sign({ user: req.user }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    // Use frontend URL from environment variable
+    res.redirect(`${process.env.FRONTEND_URL}/auth/google/callback?token=${token}`);
+  }
+);
   
 
 router.get("/user", (req, res) => {
